@@ -1,5 +1,13 @@
+const webpack = require('webpack')
+const path = require('path')
 const appData = require('./data.json')
 const seller = appData.seller
+
+
+function resolve(dir) {
+  console.log('>>>', __dirname, '_', dir)
+  return path.join(__dirname, dir)
+}
 
 module.exports = {
   css: {
@@ -27,5 +35,13 @@ module.exports = {
         })
       })
     }
+  },
+  chainWebpack(config) {
+    config.resolve.alias
+      .set('components', resolve('src/components'))
+      .set('common', resolve('src/common'))
+      .set('api', resolve('src/api'))
+      // .set('cube-ui', resolve('node_modules/cube-ui'))
   }
+
 }
